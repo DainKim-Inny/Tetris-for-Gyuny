@@ -366,11 +366,11 @@ void gameLoop() {
             }
 
             // 점수 10점 이상 시 축하 메시지 표시 및 게임 멈춤
-            if (score >= 10 && !congratulated) {
+            if (score >= 50 && !congratulated) {
                 congratulated = true; // 축하 메시지 표시
                 waitingForNextLevel = true; // 다음 레벨 대기 상태로 변경
                 draw(); // 화면 업데이트
-                Sleep(150); // 잠시 대기
+                Sleep(200); // 잠시 대기
                 return; // 게임 멈춤
             }
 
@@ -382,7 +382,7 @@ void gameLoop() {
 
         // 게임 상태 출력
         draw();
-        Sleep(150); // 화면 업데이트 속도 조절
+        Sleep(200); // 화면 업데이트 속도 조절
     }
 
     // 게임 오버 후 입력 대기
@@ -428,5 +428,6 @@ int main() {
     system("cls");
 
     gameLoop(); // 게임 루프 시작
+
     return 0;
 }
