@@ -139,7 +139,7 @@ void draw() {
             PlaySound(NULL, 0, 0);
 
             // Willyou 사운드 재생
-            PlaySound(TEXT("Willyou.wav"), NULL, SND_FILENAME | SND_ASYNC);
+            PlaySound(TEXT("Wedding.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
             // 결혼 제안 메시지 출력
             waitingForNextLevel = true;
@@ -155,12 +155,6 @@ void draw() {
             // 다시 Y/N 입력 처리 및 하트 처리
             char marriageInput = _getch();
             if (marriageInput == 'y' || marriageInput == 'Y') {
-                
-                // BGM 중지
-                PlaySound(NULL, 0, 0);
-
-                // Wedding 사운드 재생
-                PlaySound(TEXT("Wedding.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
                 // 기존 문구 지우기
                 for (int i = 0; i < height; ++i) {
@@ -392,7 +386,7 @@ void gameLoop() {
             }
 
             // 점수 50점 이상 시 축하 메시지 표시 및 게임 멈춤
-            if (score >= 50 && !congratulated) {
+            if (score >= 10 && !congratulated) {
                 
                 // BGM 중지
                 PlaySound(NULL, 0, 0);
