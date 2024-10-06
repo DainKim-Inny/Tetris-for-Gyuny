@@ -135,6 +135,12 @@ void draw() {
             setCursorPosition(centerXNextLevel, height / 2 + 1);
             cout << string(nextLevelMessage.length(), ' '); // 다음 단계 메시지 지우기
 
+            // BGM 중지
+            PlaySound(NULL, 0, 0);
+
+            // Willyou 사운드 재생
+            PlaySound(TEXT("Willyou.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
             // 결혼 제안 메시지 출력
             waitingForNextLevel = true;
             string marriageMessage1 = "    WILL YOU";
@@ -173,7 +179,8 @@ void draw() {
                 cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
                 cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
                 cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
-                cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
+                cout << "■ THANK YOU FOR MARRYING ME! ■" << endl;
+                cout << "■OPEN THE LETTER UNDER THE PC■" << endl;
                 cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
                 cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
                 cout << "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■" << endl;
