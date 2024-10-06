@@ -386,7 +386,7 @@ void gameLoop() {
             }
 
             // 점수 50점 이상 시 축하 메시지 표시 및 게임 멈춤
-            if (score >= 10 && !congratulated) {
+            if (score >= 50 && !congratulated) {
                 
                 // BGM 중지
                 PlaySound(NULL, 0, 0);
