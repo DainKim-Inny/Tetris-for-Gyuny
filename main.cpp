@@ -2,6 +2,8 @@
 #include <conio.h> // _kbhit(), _getch() 사용
 #include <windows.h> // Sleep(), SetConsoleCursorPosition 사용
 #include <ctime> // rand() 사용
+#include <mmsystem.h> // PlaySound() 사용
+#pragma comment(lib, "winmm.lib") // PlaySound() 사용을 위한 라이브러리 링크
 using namespace std;
 
 const int width = 15;
@@ -126,6 +128,7 @@ void draw() {
         // Y/N 입력 처리
         char input = _getch();
         if (input == 'y' || input == 'Y') {
+            
             // 기존 문구 삭제
             setCursorPosition(centerXCongrats, height / 2);
             cout << string(congratsMessage.length(), ' '); // 축하 메시지 지우기
@@ -146,6 +149,13 @@ void draw() {
             // 다시 Y/N 입력 처리 및 하트 처리
             char marriageInput = _getch();
             if (marriageInput == 'y' || marriageInput == 'Y') {
+                
+                // BGM 중지
+                PlaySound(NULL, 0, 0);
+
+                // Wedding 사운드 재생
+                PlaySound(TEXT("Wedding.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
                 // 기존 문구 지우기
                 for (int i = 0; i < height; ++i) {
                     setCursorPosition(0, i);
@@ -275,6 +285,9 @@ void rotate() {
 
 // 게임 루프
 void gameLoop() {
+    // WAV 파일 재생 (게임 루프 시작 시 BGM 재생)
+    PlaySound(TEXT("BGM.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+    
     srand(static_cast<unsigned int>(time(0))); // 난수 초기화
     copyTetromino(rand() % 7); // 첫 블록 랜덤으로 선택
 
@@ -313,7 +326,7 @@ void gameLoop() {
             }
 
             // 게임 오버 상태에서 Y/N 입력 처리
-            if (gameOverFlag) {
+            if (gameOverFlag) {      
                 if (input == 'y' || input == 'Y') {
                     // 재시작 로직
                     score = 0; // 점수 초기화
@@ -363,10 +376,23 @@ void gameLoop() {
             // 블록이 필드 최상단에 닿았는지 확인하여 게임 오버 상태 설정
             if (currentY <= 0) {
                 gameOverFlag = true; // 게임 종료
+
+                // BGM 중지
+                PlaySound(NULL, 0, 0);
+
+                // Gameover 사운드 한 번 재생
+                PlaySound(TEXT("Gameover.wav"), NULL, SND_FILENAME | SND_SYNC);
             }
 
-            // 점수 10점 이상 시 축하 메시지 표시 및 게임 멈춤
+            // 점수 50점 이상 시 축하 메시지 표시 및 게임 멈춤
             if (score >= 50 && !congratulated) {
+                
+                // BGM 중지
+                PlaySound(NULL, 0, 0);
+
+                // Success 사운드 재생
+                PlaySound(TEXT("Success.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                
                 congratulated = true; // 축하 메시지 표시
                 waitingForNextLevel = true; // 다음 레벨 대기 상태로 변경
                 draw(); // 화면 업데이트
