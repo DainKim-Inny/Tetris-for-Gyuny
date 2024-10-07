@@ -147,6 +147,9 @@ void draw() {
             string marriageMessage2 = " MARRY ME? (Y/N)";
             int centerXMarriage1 = (width + 2 - marriageMessage1.length()) / 2;
             int centerXMarriage2 = (width + 2 - marriageMessage2.length()) / 2;
+            
+            Sleep(4000); // 4초 대기
+            
             setCursorPosition(centerXMarriage1, height/2); // 중앙에 출력
             setCursorPosition(centerXMarriage2, height/2); // 중앙에 출력
             cout << marriageMessage1 << endl;
